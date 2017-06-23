@@ -13,11 +13,13 @@ def sin_signal():
     the test set is one additional period
     the return variable is in pandas format for easy plotting
     '''
-    X = np.arange(0, 2*np.pi*11, 0.5)
-    y = np.sin(X)
-    data = pd.DataFrame.from_dict({'X': X, 'y':y})
-    train_data = data[data.X<=2*np.pi*10].copy()
-    test_data = data[data.X>2*np.pi*10].copy()
+    phase = np.arange(0, 2*np.pi*11, 0.1)
+    y = np.sin(phase)
+    data = pd.DataFrame.from_dict({'phase': phase, 'y':y})
+    # fill the last element by 0 - it's the end of the period anyways
+    data['X'] = data.y.shift(-1).fillna(0.0)
+    train_data = data[data.phase<=2*np.pi*10].copy()
+    test_data = data[data.phase>2*np.pi*10].copy()
     return train_data, test_data
 
 
@@ -105,7 +107,8 @@ class lstm_regressor():
 def main():
     train_data, test_data = sin_signal()
     regressor = lstm_regressor()
-    # regressor.train(train_data.X, train_data.y, iterations=100000)
+    regressor.train(train_data.X, train_data.y, iterations=1000)
+    test_data = test_data[16:]
     y_predicted = regressor.predict(test_data.X)
     test_data['y_predicted'] = y_predicted
 
