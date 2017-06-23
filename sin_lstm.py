@@ -25,9 +25,12 @@ def sin_signal():
 
 class lstm_model():
     def __init__(self, size_x, size_y, num_units=32, num_layers=3, keep_prob=0.5):
+        # def single_unit():
+        #     return rnn.DropoutWrapper(
+        #         rnn.LSTMCell(num_units), output_keep_prob=keep_prob)
+
         def single_unit():
-            return rnn.DropoutWrapper(
-                rnn.LSTMCell(num_units), output_keep_prob=keep_prob)
+            return rnn.LSTMCell(num_units)
 
         self.graph = tf.Graph()
         with self.graph.as_default():
