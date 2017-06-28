@@ -12,3 +12,6 @@ Even if my predictor X is just the lagges 1 period version of y, it seems like t
 
 ### Question 4.  
 What if the model has additional feature dependences that are not temporal, for example the online traffic pattern may have different profiles base on the existence of a sale event or not.  How do you model that?
+
+### useful links:
+https://stackoverflow.com/questions/43663795/tf-lstm-save-state-from-training-session-for-prediction-session-later
