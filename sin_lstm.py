@@ -111,7 +111,7 @@ def main():
     train_data, test_data = sin_signal()
     regressor = lstm_regressor()
     regressor.train(train_data.X, train_data.y, iterations=1000)
-    test_data = test_data[16:]
+    # test_data = test_data[16:]
     y_predicted = regressor.predict(test_data.X)
     test_data['y_predicted'] = y_predicted
 
